@@ -13,50 +13,27 @@ public class TaskOne {
         char [] match_c = match.toCharArray();
         char [] test_c = test.toCharArray();
 
+        int i = 0;
         int j = 0;
-        for (int i = 0; i < match_length; i++) {
+
+        while ( (i < match_length) && (j < test_length) ) {
+
+            if (counter > 1) break;
 
             char m = match_c[i];
             char t = test_c[j];
 
-
             if (t != m) {
-                if (j + 1 == test_length) {
-                    return ++counter;
-                }
-                if (i + 1 == match_length) {
-                    return ++counter;
-                }
-                if (test_c[j + 1] == match_c[i + 1]) {
-                    counter++;
+                counter++;
+                if ( (i+1 == match_length) || (j+1 == test_length) ) break;
+                if (test_c[j + 1] == m) {
                     j++;
-                    continue;
                 }
-                if ( (test_c[j + 1] == m) || (t == match_c[i+1]) ) {
-                    if (test_c[j + 1] == m) {
-                        j++;
-                    } else {
-                        j--;
-                    }
-                    counter++;
-                } else {
-                    return counter + 2;
+                if (match_c[i + 1] == t) {
+                    i++;
                 }
-            } else {
-                if ( (j + 1 == test_length) && (i + 1 == match_length) ) {
-                    continue;
-                } else if ( (j + 1 == test_length) || (i + 1 == match_length) ) {
-                        return ++counter;
-                    }
-            }
-            
-            if (counter >= 2) {
-                
-                return counter;
-            }
-
-            System.out.println(i + " " + j);
-
+            } 
+            i++;
             j++;
         }
         
