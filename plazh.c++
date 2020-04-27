@@ -1,28 +1,49 @@
 #include <iostream>
-
-//  Node is defined as :
-typedef struct node
-{
-    int val;
-    struct node* left;
-    struct node* right;
-    int ht;
-} node; 
-
-
-void find_(int max, int last, node * node) 
-{
-    last++;
-    if (last > max) max = last;
-
-    if (node->right != nullptr) find_(max, last, node->right);
-    if (node->left != nullptr) find_(max, last, node->left);
-};
+#include <string>
+#include <vector>
+#include <algorithm>
 
 int main() {
-    int max = 0;
-    find_(max,0,nullptr);
+
+    int L;
+    int n;
+
+    std::cin >> L;
+
+    std::vector<int> vec(0);
+
+    
+    int number = 0;
+    int min = 0;
+
+    for (int j = 0; j < L; j++) 
+    {
+        std::cin >> n;
+        vec.clear();
+        for (int i = 0; i < n; i++) 
+        {
+            std::cin >> number;
+            vec.push_back(number);
+        }
+        std::sort(vec.begin(),vec.end());
+
+        int ex = *vec.begin();
+        min = (vec[1] ^ vec[0]);
+
+        for (int i = 1; i < vec.size(); i++) 
+        {
+            if ( ((vec[i] ^ ex) < min) ) {
+                min = vec[i]^ex;
+            }
+            ex = vec[i];
+        }
+
+
+        std::cout << min << std::endl;
+    }
+
+
 	
-    std::cout << max << std::endl;
+   
     return 0;
 };
